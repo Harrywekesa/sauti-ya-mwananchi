@@ -185,4 +185,8 @@ input:focus, textarea:focus, select:focus {
 /* Utility to center container padding */
 .container {
   max-width: 1200px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
 }
