@@ -3,7 +3,7 @@ import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { ProposalCard } from '../components/ProposalCard';
 import { Badge } from '../components/ui/badge';
-import { ArrowRight, Users, FileText, Vote, BarChart3, Eye, CheckCircle } from 'lucide-react';
+import { ArrowRight, Users, FileText, Vote, BarChart3, Eye, CheckCircle, Search } from 'lucide-react';
 
 const trendingProposals = [
   {
