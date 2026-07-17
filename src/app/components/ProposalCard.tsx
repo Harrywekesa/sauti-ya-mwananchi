@@ -3,7 +3,7 @@ import { Card, CardContent, CardFooter, CardHeader } from './ui/card';
 import { Badge } from './ui/badge';
 import { Button } from './ui/button';
 import { Progress } from './ui/progress';
-import { ThumbsUp, ThumbsDown, MessageSquare, Calendar, MapPin, Building2, User, ArrowRight } from 'lucide-react';
+import { ThumbsUp, ThumbsDown, MessageSquare, MapPin, Building2, User, ArrowRight } from 'lucide-react';
 
 export interface Proposal {
   id: string;
@@ -29,107 +29,148 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
   const yesPercentage = totalVotes > 0 ? (proposal.yesVotes / totalVotes) * 100 : 0;
   const noPercentage = 100 - yesPercentage;
 
-  // Modern soft tinted badge styles
-  const statusStyles: Record<string, string> = {
-    submitted: 'bg-slate-50 text-slate-700 border border-slate-200/50',
-    reviewed: 'bg-amber-50/80 text-amber-700 border border-amber-200/40',
-    presented: 'bg-blue-50/80 text-blue-700 border border-blue-200/40',
-    passed: 'bg-emerald-50/80 text-emerald-700 border border-emerald-200/40',
-    rejected: 'bg-rose-50/80 text-rose-700 border border-rose-200/40',
+  // Premium status styling with specific left-accent colors and dot markers
+  const statusConfig: Record<string, { badge: string; dot: string; border: string; accent: string; label: string }> = {
+    submitted: {
+      badge: 'bg-slate-50 text-slate-700 border-slate-200',
+      dot: 'bg-slate-400',
+      border: 'border-l-slate-400',
+      accent: 'group-hover:text-slate-600',
+      label: 'Submitted',
+    },
+    reviewed: {
+      badge: 'bg-amber-50 text-amber-800 border-amber-200/50',
+      dot: 'bg-amber-500 animate-pulse',
+      border: 'border-l-amber-500',
+      accent: 'group-hover:text-amber-600',
+      label: 'Under Review',
+    },
+    presented: {
+      badge: 'bg-blue-50 text-blue-800 border-blue-200/50',
+      dot: 'bg-blue-500 animate-pulse',
+      border: 'border-l-blue-500',
+      accent: 'group-hover:text-blue-600',
+      label: 'Presented',
+    },
+    passed: {
+      badge: 'bg-emerald-50 text-emerald-800 border-emerald-200/50',
+      dot: 'bg-emerald-500',
+      border: 'border-l-kenya-green',
+      accent: 'group-hover:text-kenya-green',
+      label: 'Passed',
+    },
+    rejected: {
+      badge: 'bg-rose-50 text-rose-800 border-rose-200/50',
+      dot: 'bg-rose-500',
+      border: 'border-l-kenya-red',
+      accent: 'group-hover:text-kenya-red',
+      label: 'Rejected',
+    },
   };
 
-  const statusLabels: Record<string, string> = {
-    submitted: 'Submitted',
-    reviewed: 'Under Review',
-    presented: 'Presented to House',
-    passed: 'Policy Passed',
-    rejected: 'Policy Rejected',
-  };
+  const currentStatus = statusConfig[proposal.status] || statusConfig.submitted;
 
   return (
-    <Card className="flex flex-col h-full bg-white border border-gray-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-300">
-      {/* Card Header: Category & Status Badge Row */}
-      <CardHeader className="p-4 pb-2 flex-none">
-        <div className="flex items-center justify-between gap-2 mb-2">
-          <Badge className={`${statusStyles[proposal.status]} font-semibold text-[10px] tracking-wide py-0.5 px-2.5 rounded-full shadow-none`}>
-            {statusLabels[proposal.status]}
-          </Badge>
-          <Badge variant="outline" className="text-[10px] text-gray-500 font-medium py-0.5 px-2.5 border-gray-200/60 rounded-full bg-gray-50/30">
+    <Card className={`group relative flex flex-col h-full bg-white border border-gray-200/60 pl-4 border-l-4 ${currentStatus.border} hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden`}>
+      
+      {/* Decorative top-right ambient blur */}
+      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-slate-500/5 to-transparent blur-xl pointer-events-none" />
+
+      {/* Header Row: Category Badge & Status Dot Indicator */}
+      <CardHeader className="p-5 pb-2 flex-none">
+        <div className="flex items-center justify-between gap-3 mb-3">
+          <Badge variant="outline" className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider py-0.5 px-3 border-gray-200/60 rounded-full bg-gray-50/50">
             {proposal.category}
           </Badge>
+          
+          <div className={`flex items-center gap-1.5 py-0.5 px-2.5 rounded-full border text-[11px] font-bold ${currentStatus.badge}`}>
+            <span className={`h-1.5 w-1.5 rounded-full ${currentStatus.dot}`} />
+            <span>{currentStatus.label}</span>
+          </div>
         </div>
         
         <Link to={`/proposal/${proposal.id}`}>
-          <h3 className="text-base font-bold text-gray-900 line-clamp-2 hover:text-kenya-green transition-colors leading-snug cursor-pointer">
+          <h3 className="text-base font-extrabold text-gray-900 line-clamp-2 hover:text-kenya-green transition-colors leading-snug cursor-pointer group-hover:text-gray-800">
             {proposal.title}
           </h3>
         </Link>
       </CardHeader>
 
-      {/* Card Content: Body description, vote metrics, metadata */}
-      <CardContent className="px-4 py-2 space-y-4 flex-1">
+      {/* Card Content */}
+      <CardContent className="px-5 py-2 space-y-4 flex-1">
         <p className="text-xs text-gray-500 line-clamp-3 leading-relaxed">
           {proposal.description}
         </p>
 
-        {/* Voting Progress Bar & Detailed Percentages */}
-        <div className="p-3 bg-slate-50/60 rounded-xl border border-slate-100/50 space-y-2">
+        {/* Voting Progress Card: Double gradient representation (Yes in Emerald, No in Red track) */}
+        <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100 space-y-3">
           <div className="flex items-center justify-between text-[11px] font-bold text-gray-600">
-            <span>Consensus Status</span>
-            <span className="text-slate-900">{totalVotes.toLocaleString()} Votes</span>
+            <span className="flex items-center gap-1">🗳️ Citizen Vote Ratio</span>
+            <span className="text-slate-900 font-extrabold">{totalVotes.toLocaleString()} cast</span>
           </div>
           
-          <Progress value={yesPercentage} className="h-1.5 bg-gray-200" />
+          {/* Custom Dual-color bar track: background is rose-100 (for No), progress fill is emerald-500 (for Yes) */}
+          <div className="relative w-full h-2 bg-rose-100 rounded-full overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500" 
+              style={{ width: `${yesPercentage}%` }}
+            />
+          </div>
           
-          <div className="grid grid-cols-2 gap-2 text-[10px] font-semibold pt-0.5">
-            <div className="flex items-center gap-1 text-emerald-600">
-              <ThumbsUp className="h-3 w-3 shrink-0" />
+          <div className="grid grid-cols-2 gap-2 text-[10px] font-extrabold pt-0.5">
+            <div className="flex items-center gap-1.5 text-emerald-600">
+              <ThumbsUp className="h-3.5 w-3.5 shrink-0" />
               <span>{yesPercentage.toFixed(0)}% Yes ({proposal.yesVotes.toLocaleString()})</span>
             </div>
-            <div className="flex items-center gap-1 text-rose-600 justify-end">
-              <ThumbsDown className="h-3 w-3 shrink-0" />
+            <div className="flex items-center gap-1.5 text-rose-600 justify-end">
+              <ThumbsDown className="h-3.5 w-3.5 shrink-0" />
               <span>{noPercentage.toFixed(0)}% No ({proposal.noVotes.toLocaleString()})</span>
             </div>
           </div>
         </div>
 
-        {/* Core Metadata: Region & Ministry Grid */}
-        <div className="grid grid-cols-2 gap-2 text-[11px] text-gray-500 pt-1">
-          <div className="flex items-center gap-1.5 min-w-0">
-            <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
-            <span className="truncate">{proposal.region}</span>
+        {/* Core Metadata tags */}
+        <div className="flex flex-wrap gap-2 text-[10.5px] text-gray-500 font-semibold pt-1">
+          <div className="flex items-center gap-1 bg-gray-50 border border-gray-100 py-1 px-2.5 rounded-lg">
+            <MapPin className="h-3 w-3 text-gray-400" />
+            <span>{proposal.region}</span>
           </div>
-          <div className="flex items-center gap-1.5 min-w-0">
-            <Building2 className="h-3.5 w-3.5 text-gray-400 shrink-0" />
-            <span className="truncate">{proposal.ministry}</span>
+          <div className="flex items-center gap-1 bg-gray-50 border border-gray-100 py-1 px-2.5 rounded-lg">
+            <Building2 className="h-3 w-3 text-gray-400" />
+            <span>{proposal.ministry}</span>
           </div>
         </div>
 
-        {/* Dedicated Representative Row (if assigned) */}
+        {/* Assigned Representative Details Banner */}
         {proposal.representative && (
-          <div className="flex items-center gap-2 pt-2.5 border-t border-gray-100/60">
-            <div className="h-5 w-5 bg-gradient-to-tr from-kenya-green to-kenya-green-dark text-white rounded-full flex items-center justify-center text-[9px] font-extrabold shadow-sm shrink-0">
-              {proposal.representative.replace(/^(Hon\.|CS|Dr\.)\s+/g, '')[0]}
+          <div className="flex items-center justify-between gap-3 p-2 bg-gradient-to-r from-gray-50 to-white border border-gray-100/50 rounded-xl">
+            <div className="flex items-center gap-2 min-w-0">
+              <div className="h-6 w-6 bg-gradient-to-tr from-kenya-green to-emerald-600 text-white rounded-full flex items-center justify-center text-[10px] font-extrabold shadow-sm shrink-0">
+                {proposal.representative.replace(/^(Hon\.|CS|Dr\.)\s+/g, '')[0]}
+              </div>
+              <div className="text-[10.5px] min-w-0">
+                <div className="text-gray-400 font-medium leading-none">Representative</div>
+                <div className="font-bold text-gray-800 truncate mt-0.5">{proposal.representative}</div>
+              </div>
             </div>
-            <div className="text-[11px] min-w-0 truncate">
-              <span className="text-gray-400">Assigned: </span>
-              <strong className="text-gray-700 font-semibold">{proposal.representative}</strong>
-            </div>
+            <Badge className="bg-emerald-500/10 text-emerald-700 hover:bg-emerald-500/20 shadow-none border-none text-[9px] font-bold py-0.5 px-2">
+              MCA
+            </Badge>
           </div>
         )}
       </CardContent>
 
-      {/* Card Footer: Comments Counter & Detail Link */}
-      <CardFooter className="px-4 py-3 border-t border-gray-100 bg-gray-50/30 flex items-center justify-between flex-none">
-        <div className="flex items-center gap-1.5 text-xs text-gray-500 font-semibold">
-          <MessageSquare className="h-3.5 w-3.5 text-gray-400" />
+      {/* Footer Section: Comment tracker & Primary actions */}
+      <CardFooter className="px-5 py-3 border-t border-gray-100 bg-gray-50/20 flex items-center justify-between flex-none">
+        <div className="flex items-center gap-1.5 text-xs text-gray-500 font-bold">
+          <MessageSquare className="h-4 w-4 text-gray-400" />
           <span>{proposal.comments} comments</span>
         </div>
         
         <Link to={`/proposal/${proposal.id}`}>
-          <Button size="sm" className="bg-kenya-green hover:bg-kenya-green-dark text-white rounded-md font-semibold text-xs h-7 px-3 flex items-center gap-1 shadow-sm transition-all duration-200">
+          <Button size="sm" className="bg-kenya-green hover:bg-kenya-green-dark text-white rounded-lg font-bold text-xs h-8 px-4 flex items-center gap-1 shadow-sm transition-all duration-200">
             View details
-            <ArrowRight className="h-3.5 w-3.5" />
+            <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
           </Button>
         </Link>
       </CardFooter>
