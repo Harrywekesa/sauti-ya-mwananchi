@@ -29,41 +29,31 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
   const yesPercentage = totalVotes > 0 ? (proposal.yesVotes / totalVotes) * 100 : 0;
   const noPercentage = 100 - yesPercentage;
 
-  // Premium status styling with specific left-accent colors and dot markers
-  const statusConfig: Record<string, { badge: string; dot: string; border: string; accent: string; label: string }> = {
+  // Simple, elegant status configurations
+  const statusConfig: Record<string, { badge: string; dot: string; label: string }> = {
     submitted: {
       badge: 'bg-slate-50 text-slate-700 border-slate-200',
       dot: 'bg-slate-400',
-      border: 'border-l-slate-400',
-      accent: 'group-hover:text-slate-600',
       label: 'Submitted',
     },
     reviewed: {
       badge: 'bg-amber-50 text-amber-800 border-amber-200/50',
       dot: 'bg-amber-500 animate-pulse',
-      border: 'border-l-amber-500',
-      accent: 'group-hover:text-amber-600',
       label: 'Under Review',
     },
     presented: {
       badge: 'bg-blue-50 text-blue-800 border-blue-200/50',
       dot: 'bg-blue-500 animate-pulse',
-      border: 'border-l-blue-500',
-      accent: 'group-hover:text-blue-600',
       label: 'Presented',
     },
     passed: {
       badge: 'bg-emerald-50 text-emerald-800 border-emerald-200/50',
       dot: 'bg-emerald-500',
-      border: 'border-l-kenya-green',
-      accent: 'group-hover:text-kenya-green',
       label: 'Passed',
     },
     rejected: {
       badge: 'bg-rose-50 text-rose-800 border-rose-200/50',
       dot: 'bg-rose-500',
-      border: 'border-l-kenya-red',
-      accent: 'group-hover:text-kenya-red',
       label: 'Rejected',
     },
   };
@@ -71,12 +61,12 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
   const currentStatus = statusConfig[proposal.status] || statusConfig.submitted;
 
   return (
-    <Card className={`group relative flex flex-col h-full bg-white border border-gray-200/60 pl-4 border-l-4 ${currentStatus.border} hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden`}>
+    <Card className="group relative flex flex-col h-full bg-white border border-gray-200/60 pl-3.5 border-l-[5px] border-l-kenya-green hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden">
       
       {/* Decorative top-right ambient blur */}
-      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-slate-500/5 to-transparent blur-xl pointer-events-none" />
+      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-kenya-green/5 to-transparent blur-xl pointer-events-none" />
 
-      {/* Header Row: Category Badge & Status Dot Indicator */}
+      {/* Header Row: Category Badge & Status Pill */}
       <CardHeader className="p-5 pb-2 flex-none">
         <div className="flex items-center justify-between gap-3 mb-3">
           <Badge variant="outline" className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider py-0.5 px-3 border-gray-200/60 rounded-full bg-gray-50/50">
@@ -102,7 +92,7 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
           {proposal.description}
         </p>
 
-        {/* Voting Progress Card: Double gradient representation (Yes in Emerald, No in Red track) */}
+        {/* Voting Progress Card: Dual color representation (Yes in Emerald, No in Red track) */}
         <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100 space-y-3">
           <div className="flex items-center justify-between text-[11px] font-bold text-gray-600">
             <span className="flex items-center gap-1">🗳️ Citizen Vote Ratio</span>
