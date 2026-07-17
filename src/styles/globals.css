@@ -1,37 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  /* Kenyan Flag Color Palette */
-  --color-kenya-black: #000000;
-  --color-kenya-red: #BB0000;
-  --color-kenya-green: #006600;
+  /* Premium Kenyan Flag HSL Color Palette */
+  --color-kenya-black: #121214;
+  --color-kenya-red: #D91A1A;
+  --color-kenya-green: #0A7A3B;
   --color-kenya-white: #FFFFFF;
   
-  /* Extended palette for UI */
-  --color-kenya-red-light: #E63946;
-  --color-kenya-red-dark: #8B0000;
-  --color-kenya-green-light: #2D6A4F;
-  --color-kenya-green-dark: #004D00;
+  /* Extended palette for modern UI */
+  --color-kenya-red-light: #FFECEC;
+  --color-kenya-red-dark: #A60C0C;
+  --color-kenya-green-light: #EBFDF4;
+  --color-kenya-green-dark: #075E2D;
   
-  /* Neutral grays */
-  --color-gray-50: #F9FAFB;
-  --color-gray-100: #F3F4F6;
-  --color-gray-200: #E5E7EB;
-  --color-gray-300: #D1D5DB;
-  --color-gray-400: #9CA3AF;
-  --color-gray-500: #6B7280;
-  --color-gray-600: #4B5563;
-  --color-gray-700: #374151;
-  --color-gray-800: #1F2937;
-  --color-gray-900: #111827;
+  /* Modern Neutral Grays */
+  --color-gray-50: #F8FAFC;
+  --color-gray-100: #F1F5F9;
+  --color-gray-200: #E2E8F0;
+  --color-gray-300: #CBD5E1;
+  --color-gray-400: #94A3B8;
+  --color-gray-500: #64748B;
+  --color-gray-600: #475569;
+  --color-gray-700: #334155;
+  --color-gray-800: #1E293B;
+  --color-gray-900: #0F172A;
 
-  /* Semantic colors */
+  /* Semantic mappings */
   --color-primary: var(--color-kenya-green);
-  --color-primary-hover: var(--color-kenya-green-light);
+  --color-primary-hover: var(--color-kenya-green-dark);
   --color-secondary: var(--color-kenya-red);
   --color-accent: var(--color-kenya-black);
   
-  /* Status colors */
+  /* Status Colors */
   --color-success: #10B981;
   --color-warning: #F59E0B;
   --color-error: var(--color-kenya-red);
@@ -45,100 +46,143 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: var(--color-gray-50);
-  color: var(--color-gray-900);
+  background-color: #F8FAFC;
+  color: #0F172A;
   line-height: 1.6;
 }
 
+/* Premium Typography styles */
 h1 {
   font-size: 2.25rem;
-  font-weight: 700;
-  line-height: 1.2;
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+  color: #0F172A;
   margin-bottom: 1rem;
 }
 
 h2 {
-  font-size: 1.875rem;
-  font-weight: 600;
+  font-size: 1.75rem;
+  font-weight: 700;
   line-height: 1.3;
+  letter-spacing: -0.02em;
+  color: #0F172A;
   margin-bottom: 0.875rem;
 }
 
 h3 {
-  font-size: 1.5rem;
+  font-size: 1.35rem;
   font-weight: 600;
-  line-height: 1.3;
+  line-height: 1.4;
+  letter-spacing: -0.015em;
+  color: #1E293B;
   margin-bottom: 0.75rem;
 }
 
 h4 {
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-weight: 600;
   line-height: 1.4;
-  margin-bottom: 0.5rem;
-}
-
-h5 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  line-height: 1.4;
-  margin-bottom: 0.5rem;
-}
-
-h6 {
-  font-size: 1rem;
-  font-weight: 600;
-  line-height: 1.5;
+  color: #1E293B;
   margin-bottom: 0.5rem;
 }
 
 p {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 0.975rem;
+  color: #475569;
+  line-height: 1.625;
   margin-bottom: 1rem;
 }
 
 a {
   color: var(--color-primary);
   text-decoration: none;
+  transition: color 0.2s ease-in-out;
 }
 
 a:hover {
-  text-decoration: underline;
+  color: var(--color-primary-hover);
+  text-decoration: none;
 }
 
-button {
-  font-family: inherit;
+/* Glassmorphism Header classes */
+header {
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border-bottom: 1px solid rgba(226, 232, 240, 0.6) !important;
 }
 
-/* Accessibility */
-.sr-only {
+/* Flag Trim Accent Bar */
+header::before {
+  content: "";
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border-width: 0;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(
+    to right,
+    #121214 0%,
+    #121214 25%,
+    #D91A1A 25%,
+    #D91A1A 50%,
+    #FFFFFF 50%,
+    #FFFFFF 55%,
+    #0A7A3B 55%,
+    #0A7A3B 100%
+  );
+  z-index: 100;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  body {
-    --color-primary: #005500;
-    --color-secondary: #AA0000;
-  }
+/* Premium Card elevation & hover styles */
+.card, [data-slot="card"] {
+  background: #FFFFFF !important;
+  border: 1px solid rgba(226, 232, 240, 0.8) !important;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05) !important;
+  border-radius: 12px !important;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Focus visible for keyboard navigation */
+.card:hover, [data-slot="card"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 15px -3px rgba(15, 23, 42, 0.04), 0 4px 6px -4px rgba(15, 23, 42, 0.04) !important;
+}
+
+/* Smooth scale transitions for buttons */
+button, [role="button"] {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+button:active, [role="button"]:active {
+  transform: scale(0.97) !important;
+}
+
+/* Inputs styling improvements */
+input, textarea, select {
+  font-family: inherit;
+  border-radius: 8px !important;
+  border: 1px solid rgba(203, 213, 225, 0.8) !important;
+  padding: 0.625rem 0.875rem !important;
+  transition: all 0.2s ease-in-out !important;
+}
+
+input:focus, textarea:focus, select:focus {
+  border-color: var(--color-primary) !important;
+  box-shadow: 0 0 0 3px rgba(10, 122, 59, 0.15) !important;
+  outline: none !important;
+}
+
+/* Custom focus states for keyboards */
 *:focus-visible {
-  outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-primary) !important;
+  outline-offset: 2px !important;
+}
+
+/* Utility to center container padding */
+.container {
+  max-width: 1200px !important;
 }
