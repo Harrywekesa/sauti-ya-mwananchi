@@ -67,7 +67,7 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
       <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-kenya-green/5 to-transparent blur-xl pointer-events-none" />
 
       {/* Header Row: Category Badge & Status Pill */}
-      <CardHeader className="p-4 pb-1.5 flex-none">
+      <CardHeader className="px-6 pt-5 pb-2 flex-none">
         <div className="flex items-center justify-between gap-3 mb-3">
           <Badge variant="outline" className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider py-0.5 px-3 border-gray-200/60 rounded-full bg-gray-50/50">
             {proposal.category}
@@ -87,13 +87,13 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
       </CardHeader>
 
       {/* Card Content */}
-      <CardContent className="px-4 py-2 space-y-4 flex-1">
+      <CardContent className="px-6 py-2 space-y-4 flex-1">
         <p className="text-xs text-gray-500 line-clamp-3 leading-relaxed">
           {proposal.description}
         </p>
 
         {/* Voting Progress Card: Dual color representation (Yes in Emerald, No in Red track) */}
-        <div className="p-3 bg-slate-50 rounded-xl border border-slate-100 space-y-3">
+        <div className="p-3.5 bg-slate-50 rounded-xl border border-slate-100 space-y-3">
           <div className="flex items-center justify-between text-[11px] font-bold text-gray-600">
             <span className="flex items-center gap-1">🗳️ Citizen Vote Ratio</span>
             <span className="text-slate-900 font-extrabold">{totalVotes.toLocaleString()} cast</span>
@@ -151,7 +151,7 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
       </CardContent>
 
       {/* Footer Section: Comment tracker & Primary actions */}
-      <CardFooter className="px-4 py-3 border-t border-gray-100 bg-gray-50/20 flex items-center justify-between flex-none">
+      <CardFooter className="px-6 py-4 border-t border-gray-100 bg-gray-50/20 flex items-center justify-between flex-none">
         <div className="flex items-center gap-1.5 text-xs text-gray-500 font-bold">
           <MessageSquare className="h-4 w-4 text-gray-400" />
           <span>{proposal.comments} comments</span>

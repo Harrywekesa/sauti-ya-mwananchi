@@ -140,13 +140,13 @@ export function HomePage() {
       </section>
 
       {/* Stats Section */}
-      <section className="container mx-auto px-4">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <section className="container mx-auto px-4 mt-8 md:mt-12">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
           {stats.map((stat, index) => (
             <Card key={index}>
-              <CardContent className="pt-6 text-center">
-                <div className={`text-3xl mb-2 ${stat.color}`}>{stat.value}</div>
-                <div className="text-sm text-gray-600">{stat.label}</div>
+              <CardContent className="py-8 text-center">
+                <div className={`text-3xl font-extrabold mb-2 ${stat.color}`}>{stat.value}</div>
+                <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">{stat.label}</div>
               </CardContent>
             </Card>
           ))}
@@ -188,7 +188,7 @@ export function HomePage() {
               const Icon = feature.icon;
               return (
                 <Card key={index} className="group relative flex flex-col h-full bg-white border border-gray-200/60 border-l-[5px] border-l-kenya-green hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden">
-                  <CardHeader className="p-5">
+                  <CardHeader className="p-6">
                     <div className={`${feature.color} mb-3 group-hover:scale-105 transition-transform duration-300`}>
                       <Icon className="h-10 w-10" />
                     </div>
