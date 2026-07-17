@@ -59,14 +59,14 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
   const currentStatus = statusConfig[proposal.status] || statusConfig.submitted;
 
   return (
-    <Card className="group relative flex flex-col lg:flex-row lg:items-center justify-between gap-6 p-6 bg-white border border-slate-100 border-l-[5px] border-l-kenya-green hover:-translate-y-1 hover:shadow-lg hover:shadow-slate-100/50 transition-all duration-300 rounded-xl overflow-hidden w-full">
+    <Card className="group relative flex flex-col h-full bg-white border border-slate-100 border-l-[5px] border-l-kenya-green hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden">
       
       {/* Decorative top-right ambient blur */}
       <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-kenya-green/5 to-transparent blur-xl pointer-events-none" />
 
-      {/* Left side: Content block */}
-      <div className="flex-1 min-w-0 space-y-3">
-        <div className="flex items-center gap-2 flex-wrap">
+      {/* Header Row: Category Badge & Status Pill */}
+      <CardHeader className="px-6 pt-5 pb-2 flex-none">
+        <div className="flex items-center justify-between gap-3 mb-2.5">
           <Badge variant="outline" className="text-[10px] text-gray-500 font-semibold uppercase tracking-wider py-0.5 px-3 border-slate-200/60 rounded-full bg-gray-50/50">
             {proposal.category}
           </Badge>
@@ -77,63 +77,66 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
           </div>
         </div>
         
-        <Link to={`/proposal/${proposal.id}`} className="block">
-          <h3 className="text-base lg:text-lg font-extrabold text-gray-900 hover:text-kenya-green transition-colors leading-snug cursor-pointer">
+        <Link to={`/proposal/${proposal.id}`}>
+          <h3 className="text-base font-extrabold text-gray-900 line-clamp-2 hover:text-kenya-green transition-colors leading-snug cursor-pointer group-hover:text-gray-800">
             {proposal.title}
           </h3>
         </Link>
+      </CardHeader>
 
-        <p className="text-xs text-gray-500 line-clamp-2 leading-relaxed max-w-4xl">
+      {/* Card Content */}
+      <CardContent className="px-6 py-2 space-y-4 flex-1">
+        <p className="text-xs text-gray-500 line-clamp-3 leading-relaxed">
           {proposal.description}
         </p>
 
-        {/* Metadata & Representative Info */}
-        <div className="flex flex-wrap items-center gap-3 text-[11px] text-gray-400 font-semibold pt-1">
-          <div className="flex items-center gap-1">
-            <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
-            <span>{proposal.region}</span>
-          </div>
-          <span className="text-gray-300">•</span>
-          <div className="flex items-center gap-1">
-            <Building2 className="h-3.5 w-3.5 text-gray-400 shrink-0" />
-            <span>{proposal.ministry}</span>
-          </div>
-          {proposal.representative && (
-            <>
-              <span className="text-gray-300">•</span>
-              <div className="flex items-center gap-1">
-                <User className="h-3.5 w-3.5 text-gray-400 shrink-0" />
-                <span>Rep: <strong className="text-gray-700 font-bold">{proposal.representative}</strong></span>
-              </div>
-            </>
-          )}
-        </div>
-      </div>
-
-      {/* Right side: Voting summary & CTA block */}
-      <div className="flex flex-col sm:flex-row lg:flex-col items-stretch lg:items-end justify-between gap-4 lg:w-72 border-t lg:border-t-0 lg:border-l border-slate-100 pt-4 lg:pt-0 lg:pl-6 flex-none">
-        <div className="space-y-1.5 w-full">
+        {/* Voting Progress Line: Clean and minimalist representation */}
+        <div className="space-y-1.5 pt-1">
           <div className="flex items-center justify-between text-[11px] font-bold text-gray-600">
             <span className="text-emerald-600">{yesPercentage.toFixed(0)}% Approved</span>
-            <span className="text-slate-500">{totalVotes.toLocaleString()} votes cast</span>
+            <span className="text-slate-500">{totalVotes.toLocaleString()} votes</span>
           </div>
           <Progress value={yesPercentage} className="h-1.5 bg-slate-100" />
         </div>
 
-        <div className="flex items-center justify-between lg:justify-end gap-6 w-full mt-1.5">
-          <div className="flex items-center gap-1.5 text-xs text-gray-500 font-bold">
-            <MessageSquare className="h-4 w-4 text-gray-400" />
-            <span>{proposal.comments} comments</span>
+        {/* Core Metadata tags: 2-column layout */}
+        <div className="grid grid-cols-2 gap-2 text-[10.5px] text-gray-400 font-semibold pt-1">
+          <div className="flex items-center gap-1 min-w-0">
+            <MapPin className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+            <span className="truncate">{proposal.region}</span>
           </div>
-          
-          <Link to={`/proposal/${proposal.id}`}>
-            <Button size="sm" className="bg-kenya-green hover:bg-kenya-green-dark text-white rounded-lg font-bold text-xs h-8 px-4 flex items-center gap-1 shadow-sm transition-all duration-200">
-              View details
-              <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
-            </Button>
-          </Link>
+          <div className="flex items-center gap-1 min-w-0">
+            <Building2 className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+            <span className="truncate">{proposal.ministry}</span>
+          </div>
         </div>
-      </div>
+
+        {/* Representative row: Clean inline layout */}
+        {proposal.representative && (
+          <div className="flex items-center gap-1.5 pt-2.5 border-t border-slate-100 text-[11px]">
+            <User className="h-3.5 w-3.5 text-gray-400 shrink-0" />
+            <div className="text-[11px] min-w-0 truncate">
+              <span className="text-gray-400">Rep: </span>
+              <strong className="text-gray-700 font-bold">{proposal.representative}</strong>
+            </div>
+          </div>
+        )}
+      </CardContent>
+
+      {/* Footer Section: Comment tracker & Primary actions */}
+      <CardFooter className="px-6 py-4 border-t border-slate-100 bg-slate-50/20 flex items-center justify-between flex-none">
+        <div className="flex items-center gap-1.5 text-xs text-gray-500 font-bold">
+          <MessageSquare className="h-4 w-4 text-gray-400" />
+          <span>{proposal.comments} comments</span>
+        </div>
+        
+        <Link to={`/proposal/${proposal.id}`}>
+          <Button size="sm" className="bg-kenya-green hover:bg-kenya-green-dark text-white rounded-lg font-bold text-xs h-8 px-4 flex items-center gap-1 shadow-sm transition-all duration-200">
+            View details
+            <ArrowRight className="h-4 w-4 shrink-0 transition-transform group-hover:translate-x-0.5" />
+          </Button>
+        </Link>
+      </CardFooter>
     </Card>
   );
 }

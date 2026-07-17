@@ -192,7 +192,7 @@ export function VotePage() {
 
         {/* Active Proposals */}
         <TabsContent value="active" className="mt-6">
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {activeProposals.map((proposal) => (
               <ProposalCard key={proposal.id} proposal={proposal} />
             ))}
@@ -201,7 +201,7 @@ export function VotePage() {
 
         {/* Already Voted */}
         <TabsContent value="voted" className="mt-6">
-          <div className="flex flex-col gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {myVotedProposals.map((proposal) => (
               <div key={proposal.id} className="relative">
                 <ProposalCard proposal={proposal} />
