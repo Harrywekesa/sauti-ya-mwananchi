@@ -121,11 +121,19 @@ export function HomePage() {
 
             {/* Premium Portal Mock Search Bar */}
             <div className="relative max-w-lg mx-auto pt-2">
-              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400 z-20 pointer-events-none" />
               <input 
                 type="text" 
                 placeholder="Search reforms, wards, or representatives..." 
-                className="w-full bg-white/5 hover:bg-white/10 focus:bg-white text-white focus:text-slate-900 border border-white/10 focus:border-emerald-500 rounded-full py-3 pl-11 pr-4 text-xs font-semibold placeholder-slate-400 focus:placeholder-slate-400 transition-all duration-300 shadow-inner"
+                className="w-full bg-white/5 hover:bg-white/10 focus:bg-white text-white focus:text-slate-900 border border-white/10 focus:border-emerald-500 transition-all duration-300 shadow-inner z-10"
+                style={{
+                  borderRadius: '9999px',
+                  paddingLeft: '2.75rem',
+                  paddingRight: '1rem',
+                  paddingTop: '0.75rem',
+                  paddingBottom: '0.75rem',
+                  borderWidth: '1px'
+                }}
               />
             </div>
             
