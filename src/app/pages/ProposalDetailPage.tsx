@@ -99,18 +99,26 @@ export function ProposalDetailPage() {
     }
   };
 
-  const statusColors: Record<string, string> = {
-    submitted: 'bg-gray-500',
-    reviewed: 'bg-blue-500',
-    presented: 'bg-purple-500',
-    passed: 'bg-kenya-green',
-    rejected: 'bg-kenya-red',
+  const statusStyles: Record<string, string> = {
+    submitted: 'bg-slate-100 text-slate-800 border border-slate-200/60 shadow-none',
+    reviewed: 'bg-amber-50 text-amber-700 border border-amber-200/60 shadow-none',
+    presented: 'bg-blue-50 text-blue-700 border border-blue-200/60 shadow-none',
+    passed: 'bg-emerald-50 text-emerald-700 border border-emerald-200/60 shadow-none',
+    rejected: 'bg-rose-50 text-rose-700 border border-rose-200/60 shadow-none',
+  };
+
+  const statusLabels: Record<string, string> = {
+    submitted: 'Submitted',
+    reviewed: 'Under Review',
+    presented: 'Presented to House',
+    passed: 'Policy Passed',
+    rejected: 'Policy Rejected',
   };
 
   return (
     <div className="container mx-auto px-4 py-8">
       {/* Back Button */}
-      <Link to="/proposals" className="inline-flex items-center gap-2 text-kenya-green hover:underline mb-6">
+      <Link to="/proposals" className="inline-flex items-center gap-2 text-kenya-green hover:underline mb-6 font-semibold">
         <ArrowLeft className="h-4 w-4" />
         Back to Proposals
       </Link>
@@ -120,23 +128,23 @@ export function ProposalDetailPage() {
         <div className="lg:col-span-2 space-y-6">
           {/* Proposal Header */}
           <Card>
-            <CardHeader>
-              <div className="flex items-start justify-between gap-4">
+            <CardHeader className="pb-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
                 <div className="flex-1">
-                  <h1 className="mb-2">{proposal.title}</h1>
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-gray-600">
-                    <div className="flex items-center gap-1">
-                      <User className="h-4 w-4" />
+                  <h1 className="text-2xl md:text-3xl font-extrabold text-gray-900 leading-tight mb-2">{proposal.title}</h1>
+                  <div className="flex flex-wrap items-center gap-4 text-xs text-gray-500 font-semibold">
+                    <div className="flex items-center gap-1.5">
+                      <User className="h-4 w-4 text-kenya-green" />
                       <span>Submitted by {proposal.submittedBy}</span>
                     </div>
-                    <div className="flex items-center gap-1">
-                      <Calendar className="h-4 w-4" />
+                    <div className="flex items-center gap-1.5">
+                      <Calendar className="h-4 w-4 text-kenya-green" />
                       <span>{proposal.submittedDate}</span>
                     </div>
                   </div>
                 </div>
-                <Badge className={`${statusColors[proposal.status]} text-white shrink-0`}>
-                  {proposal.status.charAt(0).toUpperCase() + proposal.status.slice(1)}
+                <Badge className={`${statusStyles[proposal.status]} rounded-full font-medium py-1 px-3 text-xs capitalize`}>
+                  {statusLabels[proposal.status]}
                 </Badge>
               </div>
             </CardHeader>
@@ -313,16 +321,16 @@ export function ProposalDetailPage() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-col items-center text-center">
-                <Avatar className="h-16 w-16 mb-3">
+                <Avatar className="h-16 w-16 mb-3 border-2 border-kenya-green/10 shadow-sm">
                   <AvatarImage src={proposal.representative.image} />
-                  <AvatarFallback className="bg-kenya-green text-white">
-                    {proposal.representative.name.split(' ').map(n => n[0]).join('')}
+                  <AvatarFallback className="bg-gradient-to-tr from-kenya-green to-kenya-green-dark text-white font-bold">
+                    {proposal.representative.name.replace(/^(Hon\.|CS|Dr\.)\s+/g, '').split(' ').map(n => n[0]).join('').slice(0, 2)}
                   </AvatarFallback>
                 </Avatar>
-                <div className="mb-2">{proposal.representative.name}</div>
-                <p className="text-sm text-gray-600 mb-3">{proposal.representative.title}</p>
-                <Link to={`/representative/${proposal.representative.id}`}>
-                  <Button variant="outline" size="sm" className="w-full">
+                <div className="font-bold text-gray-900 mb-1">{proposal.representative.name}</div>
+                <p className="text-xs font-semibold text-gray-500 mb-3 uppercase tracking-wider">{proposal.representative.title}</p>
+                <Link to={`/representative/${proposal.representative.id}`} className="w-full">
+                  <Button variant="outline" size="sm" className="w-full text-xs font-semibold">
                     View Profile
                   </Button>
                 </Link>

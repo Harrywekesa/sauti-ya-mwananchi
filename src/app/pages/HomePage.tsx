@@ -98,30 +98,54 @@ export function HomePage() {
   return (
     <div className="space-y-16 pb-16">
       {/* Hero Section */}
-      <section className="bg-gradient-to-br from-kenya-green to-kenya-green-dark text-white py-20">
-        <div className="container mx-auto px-4">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
-            <h1 className="text-white">Your Voice in Kenyan Governance</h1>
-            <p className="text-xl text-white/90">
-              Wananchi Voice empowers every Kenyan citizen to participate directly in shaping policies and decisions. Submit proposals, vote on issues, and hold leaders accountable.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center mt-8">
-              <Link to="/proposals/new">
-                <Button size="lg" className="bg-white text-kenya-green hover:bg-gray-100">
-                  Submit Proposal
-                  <ArrowRight className="ml-2 h-5 w-5" />
-                </Button>
-              </Link>
-              <Link to="/proposals">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
-                  View Proposals
-                </Button>
-              </Link>
-              <Link to="/vote">
-                <Button size="lg" className="bg-kenya-red hover:bg-kenya-red-dark text-white">
-                  Vote Now
-                </Button>
-              </Link>
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#062416] via-[#0a3822] to-[#041a10] text-white py-16 md:py-24">
+        {/* Subtle mesh background element */}
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-kenya-green/10 rounded-full blur-[120px] pointer-events-none" />
+        
+        <div className="container mx-auto px-4 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+            {/* Left Info Column */}
+            <div className="lg:col-span-7 space-y-6 text-left">
+              <Badge className="bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-3 py-1 font-semibold tracking-wide text-xs uppercase rounded-full shadow-none mb-2">
+                🇰🇪 Official Citizen Dialogue Portal
+              </Badge>
+              <h1 className="text-white text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
+                Your Voice in <br />
+                <span className="text-emerald-400 bg-clip-text">Kenyan Governance</span>
+              </h1>
+              <p className="text-base md:text-lg text-slate-300 max-w-xl leading-relaxed">
+                Wananchi Voice empowers every citizen across all Wards and Constituencies to directly submit proposals, vote on national reforms, and track legislative responses from demographic leaders.
+              </p>
+              <div className="flex flex-wrap gap-3 pt-4">
+                <Link to="/proposals/new">
+                  <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 shadow-md hover:shadow-emerald-500/10">
+                    Submit Proposal
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </Link>
+                <Link to="/proposals">
+                  <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 font-bold px-6 backdrop-blur-sm">
+                    View Proposals
+                  </Button>
+                </Link>
+                <Link to="/vote">
+                  <Button size="lg" className="bg-kenya-red hover:bg-kenya-red-dark text-white font-bold px-6 shadow-md">
+                    Vote Now
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Right Hero Image Column */}
+            <div className="lg:col-span-5 flex justify-center">
+              <div className="relative p-2 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md shadow-2xl overflow-hidden max-w-md md:max-w-full">
+                <div className="absolute inset-0 bg-gradient-to-tr from-kenya-green/20 via-transparent to-transparent pointer-events-none" />
+                <img 
+                  src="/public_participation_hero.png" 
+                  alt="Kenyan Public Participation Dashboard" 
+                  className="rounded-xl w-full object-cover shadow-inner hover:scale-[1.01] transition-transform duration-500" 
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -192,20 +216,23 @@ export function HomePage() {
 
       {/* CTA Section */}
       <section className="container mx-auto px-4">
-        <Card className="bg-gradient-to-r from-kenya-red to-kenya-red-dark text-white">
-          <CardContent className="py-12 text-center">
-            <h2 className="text-white mb-4">Ready to Make Your Voice Heard?</h2>
-            <p className="text-white/90 mb-8 max-w-2xl mx-auto">
-              Join thousands of Kenyans already participating in shaping the future of our nation. Every proposal, every vote, every voice counts.
+        <Card className="bg-gradient-to-r from-[#0f172a] to-[#020617] border border-slate-800 text-white relative overflow-hidden shadow-2xl rounded-2xl">
+          <div className="absolute top-0 right-0 w-[300px] h-[300px] bg-kenya-red/10 rounded-full blur-[80px] pointer-events-none" />
+          <div className="absolute -bottom-20 -left-20 w-[300px] h-[300px] bg-emerald-500/5 rounded-full blur-[80px] pointer-events-none" />
+          
+          <CardContent className="py-12 md:py-16 text-center relative z-10 space-y-6">
+            <h2 className="text-white text-2xl md:text-4xl font-extrabold tracking-tight">Ready to Make Your Voice Heard?</h2>
+            <p className="text-slate-400 text-sm md:text-base max-w-xl mx-auto leading-relaxed">
+              Join thousands of active Kenyans already participating in direct democratic dialogue. Every constructive proposal and cast vote builds a stronger, more accountable nation.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <div className="flex flex-col sm:flex-row gap-3 justify-center pt-2">
               <Link to="/proposals/new">
-                <Button size="lg" className="bg-white text-kenya-red hover:bg-gray-100">
+                <Button size="lg" className="bg-kenya-red hover:bg-kenya-red-dark text-white font-bold px-8 shadow-lg shadow-red-500/10">
                   Submit Your First Proposal
                 </Button>
               </Link>
               <Link to="/transparency">
-                <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10">
+                <Button size="lg" variant="outline" className="border-slate-800 text-slate-300 hover:text-white hover:bg-white/5 font-bold px-8">
                   View Transparency Dashboard
                 </Button>
               </Link>

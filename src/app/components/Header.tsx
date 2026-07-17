@@ -42,15 +42,15 @@ export function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.path}
                 to={link.path}
-                className={`px-4 py-2 rounded-lg transition-colors ${
+                className={`text-sm font-semibold transition-colors relative py-1 ${
                   isActive(link.path)
-                    ? 'bg-kenya-green text-white'
-                    : 'text-gray-700 hover:bg-gray-100'
+                    ? 'text-kenya-green border-b-2 border-kenya-green'
+                    : 'text-gray-600 hover:text-kenya-green'
                 }`}
               >
                 {link.label}
@@ -101,7 +101,7 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="md:hidden"
+              className="lg:hidden"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -116,7 +116,7 @@ export function Header() {
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <nav className="border-t border-gray-200 py-4 md:hidden">
+          <nav className="border-t border-gray-200 py-4 lg:hidden">
             <div className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link
