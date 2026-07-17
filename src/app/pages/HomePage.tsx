@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '../components/ui/card';
 import { ProposalCard } from '../components/ProposalCard';
+import { Badge } from '../components/ui/badge';
 import { ArrowRight, Users, FileText, Vote, BarChart3, Eye, CheckCircle } from 'lucide-react';
 
 const trendingProposals = [
@@ -98,54 +99,41 @@ export function HomePage() {
   return (
     <div className="space-y-16 pb-16">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-[#062416] via-[#0a3822] to-[#041a10] text-white py-16 md:py-24">
+      <section className="relative overflow-hidden bg-gradient-to-br from-[#062416] via-[#0a3822] to-[#041a10] py-20 md:py-28 border-b border-white/5">
         {/* Subtle mesh background element */}
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-kenya-green/10 rounded-full blur-[120px] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.12),transparent_70%)] pointer-events-none" />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-            {/* Left Info Column */}
-            <div className="lg:col-span-7 space-y-6 text-left">
-              <Badge className="bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-3 py-1 font-semibold tracking-wide text-xs uppercase rounded-full shadow-none mb-2">
-                🇰🇪 Official Citizen Dialogue Portal
-              </Badge>
-              <h1 className="text-white text-3xl md:text-5xl font-extrabold tracking-tight leading-tight">
-                Your Voice in <br />
-                <span className="text-emerald-400 bg-clip-text">Kenyan Governance</span>
-              </h1>
-              <p className="text-base md:text-lg text-slate-300 max-w-xl leading-relaxed">
-                Wananchi Voice empowers every citizen across all Wards and Constituencies to directly submit proposals, vote on national reforms, and track legislative responses from demographic leaders.
-              </p>
-              <div className="flex flex-wrap gap-3 pt-4">
-                <Link to="/proposals/new">
-                  <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-6 shadow-md hover:shadow-emerald-500/10">
-                    Submit Proposal
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </Button>
-                </Link>
-                <Link to="/proposals">
-                  <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 font-bold px-6 backdrop-blur-sm">
-                    View Proposals
-                  </Button>
-                </Link>
-                <Link to="/vote">
-                  <Button size="lg" className="bg-kenya-red hover:bg-kenya-red-dark text-white font-bold px-6 shadow-md">
-                    Vote Now
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Right Hero Image Column */}
-            <div className="lg:col-span-5 flex justify-center">
-              <div className="relative p-2 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-md shadow-2xl overflow-hidden max-w-md md:max-w-full">
-                <div className="absolute inset-0 bg-gradient-to-tr from-kenya-green/20 via-transparent to-transparent pointer-events-none" />
-                <img 
-                  src="/public_participation_hero.png" 
-                  alt="Kenyan Public Participation Dashboard" 
-                  className="rounded-xl w-full object-cover shadow-inner hover:scale-[1.01] transition-transform duration-500" 
-                />
-              </div>
+          <div className="max-w-3xl mx-auto text-center space-y-6">
+            <Badge className="bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-3 py-1 font-semibold tracking-wide text-xs uppercase rounded-full shadow-none mb-2">
+              🇰🇪 Official Citizen Dialogue Portal
+            </Badge>
+            
+            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight" style={{ color: '#ffffff' }}>
+              Your Voice in <span className="text-emerald-400" style={{ color: '#34d399' }}>Kenyan Governance</span>
+            </h1>
+            
+            <p className="text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto" style={{ color: '#cbd5e1' }}>
+              Wananchi Voice empowers every citizen across all Wards and Constituencies to directly submit proposals, vote on national reforms, and track legislative responses from demographic leaders.
+            </p>
+            
+            <div className="flex flex-wrap gap-4 justify-center pt-4">
+              <Link to="/proposals/new">
+                <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 shadow-lg shadow-emerald-500/20">
+                  Submit Proposal
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+              <Link to="/proposals">
+                <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 font-bold px-8 backdrop-blur-sm">
+                  View Proposals
+                </Button>
+              </Link>
+              <Link to="/vote">
+                <Button size="lg" className="bg-kenya-red hover:bg-kenya-red-dark text-white font-bold px-8 shadow-md">
+                  Vote Now
+                </Button>
+              </Link>
             </div>
           </div>
         </div>
