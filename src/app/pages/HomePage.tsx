@@ -169,7 +169,7 @@ export function HomePage() {
             </Button>
           </Link>
         </div>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-4">
           {trendingProposals.map((proposal) => (
             <ProposalCard key={proposal.id} proposal={proposal} />
           ))}

@@ -110,34 +110,34 @@ export function VotePage() {
 
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-        <Card>
+        <Card className="border border-slate-100 shadow-sm">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Active Proposals</p>
-                <p className="text-3xl text-kenya-green">{activeProposals.length}</p>
+                <p className="text-3xl font-extrabold text-kenya-green">{activeProposals.length}</p>
               </div>
               <Vote className="h-8 w-8 text-kenya-green" />
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="border border-slate-100 shadow-sm">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Your Votes</p>
-                <p className="text-3xl text-kenya-green">47</p>
+                <p className="text-3xl font-extrabold text-kenya-green">47</p>
               </div>
               <CheckCircle className="h-8 w-8 text-kenya-green" />
             </div>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="border border-slate-100 shadow-sm">
           <CardContent className="pt-6">
             <div className="flex items-center justify-between">
               <div>
                 <p className="text-sm text-gray-600 mb-1">Closing Soon</p>
-                <p className="text-3xl text-yellow-600">{upcomingDeadlines.length}</p>
+                <p className="text-3xl font-extrabold text-yellow-600">{upcomingDeadlines.length}</p>
               </div>
               <Clock className="h-8 w-8 text-yellow-600" />
             </div>
@@ -146,24 +146,24 @@ export function VotePage() {
       </div>
 
       {/* Urgent Deadlines */}
-      <Card className="mb-8 border-yellow-500 border-2">
+      <Card className="mb-8 border border-amber-200 bg-amber-50/20 shadow-sm">
         <CardContent className="pt-6">
           <div className="flex items-center gap-2 mb-4">
             <Clock className="h-5 w-5 text-yellow-600" />
-            <h3>Voting Deadlines Approaching</h3>
+            <h3 className="text-slate-900 font-extrabold">Voting Deadlines Approaching</h3>
           </div>
           <div className="space-y-3">
             {upcomingDeadlines.map((item) => (
               <div
                 key={item.id}
-                className="flex items-center justify-between p-4 bg-yellow-50 rounded-lg"
+                className="flex items-center justify-between p-4 bg-yellow-50/60 border border-yellow-100 rounded-lg"
               >
                 <div className="flex-1">
-                  <h4 className="mb-1">{item.title}</h4>
-                  <div className="flex items-center gap-3 text-sm text-gray-600">
+                  <h4 className="font-bold text-gray-900 mb-1">{item.title}</h4>
+                  <div className="flex items-center gap-3 text-xs text-gray-600 font-medium">
                     <span>{item.votes.toLocaleString()} votes</span>
                     <span>•</span>
-                    <span className="text-yellow-600">{item.timeLeft} left</span>
+                    <span className="text-yellow-600 font-semibold">{item.timeLeft} left</span>
                   </div>
                 </div>
                 <Link to={`/proposal/${item.id}`}>
@@ -192,7 +192,7 @@ export function VotePage() {
 
         {/* Active Proposals */}
         <TabsContent value="active" className="mt-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="flex flex-col gap-4">
             {activeProposals.map((proposal) => (
               <ProposalCard key={proposal.id} proposal={proposal} />
             ))}
@@ -201,7 +201,7 @@ export function VotePage() {
 
         {/* Already Voted */}
         <TabsContent value="voted" className="mt-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+          <div className="flex flex-col gap-4">
             {myVotedProposals.map((proposal) => (
               <div key={proposal.id} className="relative">
                 <ProposalCard proposal={proposal} />

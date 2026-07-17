@@ -133,7 +133,7 @@ export function ProposalsPage() {
       </div>
 
       {/* Filters */}
-      <Card className="mb-8">
+      <Card className="mb-8 border border-slate-100 shadow-sm">
         <CardContent className="pt-6">
           <div className="space-y-4">
             {/* Search */}
@@ -223,9 +223,9 @@ export function ProposalsPage() {
         </CardContent>
       </Card>
 
-      {/* Proposals Grid */}
+      {/* Proposals List */}
       {filteredProposals.length > 0 ? (
-        <div className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6">
+        <div className="flex flex-col gap-4">
           {filteredProposals.map((proposal) => (
             <ProposalCard key={proposal.id} proposal={proposal} />
           ))}
