@@ -100,37 +100,49 @@ export function HomePage() {
     <div className="space-y-16 pb-16">
       {/* Hero Section */}
       <section className="relative overflow-hidden bg-gradient-to-br from-[#062416] via-[#0a3822] to-[#041a10] py-20 md:py-28 border-b border-white/5">
-        {/* Subtle mesh background element */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.12),transparent_70%)] pointer-events-none" />
+        {/* Subtle grid pattern & mesh background for depth */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(255,255,255,0.03)_1px,transparent_1px),linear-gradient(to_bottom,rgba(255,255,255,0.03)_1px,transparent_1px)] bg-[size:4rem_4rem] pointer-events-none" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(16,185,129,0.15),transparent_75%)] pointer-events-none" />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-3xl mx-auto text-center space-y-6">
-            <Badge className="bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-3 py-1 font-semibold tracking-wide text-xs uppercase rounded-full shadow-none mb-2">
-              🇰🇪 Official Citizen Dialogue Portal
-            </Badge>
+          <div className="max-w-3xl mx-auto text-center space-y-7">
+            <div className="inline-flex items-center gap-2 bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-3.5 py-1 font-semibold tracking-wide text-[11px] uppercase rounded-full shadow-none mb-2">
+              <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              Official Citizen Dialogue Portal
+            </div>
             
-            <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight leading-tight" style={{ color: '#ffffff' }}>
+            <h1 className="text-3.5xl md:text-5xl font-extrabold tracking-tight leading-tight" style={{ color: '#ffffff' }}>
               Your Voice in <span className="text-emerald-400" style={{ color: '#34d399' }}>Kenyan Governance</span>
             </h1>
             
-            <p className="text-base md:text-lg text-slate-300 leading-relaxed max-w-2xl mx-auto" style={{ color: '#cbd5e1' }}>
+            <p className="text-sm md:text-base text-slate-300 leading-relaxed max-w-2xl mx-auto" style={{ color: '#cbd5e1' }}>
               Wananchi Voice empowers every citizen across all Wards and Constituencies to directly submit proposals, vote on national reforms, and track legislative responses from demographic leaders.
             </p>
+
+            {/* Premium Portal Mock Search Bar */}
+            <div className="relative max-w-lg mx-auto pt-2">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
+              <input 
+                type="text" 
+                placeholder="Search reforms, wards, or representatives..." 
+                className="w-full bg-white/5 hover:bg-white/10 focus:bg-white text-white focus:text-slate-900 border border-white/10 focus:border-emerald-500 rounded-full py-3 pl-11 pr-4 text-xs font-semibold placeholder-slate-400 focus:placeholder-slate-400 transition-all duration-300 shadow-inner"
+              />
+            </div>
             
             <div className="flex flex-wrap gap-4 justify-center pt-4">
               <Link to="/proposals/new">
-                <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 shadow-lg shadow-emerald-500/20">
+                <Button size="lg" className="bg-emerald-500 hover:bg-emerald-600 text-white font-bold px-8 shadow-lg shadow-emerald-500/20 h-11 text-sm rounded-full">
                   Submit Proposal
                   <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </Link>
               <Link to="/proposals">
-                <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 font-bold px-8 backdrop-blur-sm">
+                <Button size="lg" variant="outline" className="border-white/20 text-white hover:bg-white/10 font-bold px-8 backdrop-blur-sm h-11 text-sm rounded-full">
                   View Proposals
                 </Button>
               </Link>
               <Link to="/vote">
-                <Button size="lg" className="bg-kenya-red hover:bg-kenya-red-dark text-white font-bold px-8 shadow-md">
+                <Button size="lg" className="bg-kenya-red hover:bg-kenya-red-dark text-white font-bold px-8 shadow-md h-11 text-sm rounded-full">
                   Vote Now
                 </Button>
               </Link>
