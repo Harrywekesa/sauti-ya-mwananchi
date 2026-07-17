@@ -183,17 +183,17 @@ export function HomePage() {
               Transparent, accessible, and designed for every Kenyan
             </p>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="border-2 hover:border-kenya-green transition-colors">
-                  <CardHeader>
-                    <div className={`${feature.color} mb-4`}>
-                      <Icon className="h-12 w-12" />
+                <Card key={index} className="group relative flex flex-col h-full bg-white border border-gray-200/60 border-l-[5px] border-l-kenya-green hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden">
+                  <CardHeader className="p-5">
+                    <div className={`${feature.color} mb-3 group-hover:scale-105 transition-transform duration-300`}>
+                      <Icon className="h-10 w-10" />
                     </div>
-                    <CardTitle>{feature.title}</CardTitle>
-                    <CardDescription>{feature.description}</CardDescription>
+                    <CardTitle className="text-base font-bold text-gray-900 mb-1.5">{feature.title}</CardTitle>
+                    <CardDescription className="text-xs text-gray-500 leading-relaxed">{feature.description}</CardDescription>
                   </CardHeader>
                 </Card>
               );
