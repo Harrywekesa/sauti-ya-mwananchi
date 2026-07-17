@@ -189,7 +189,9 @@ export function HomePage() {
             {features.map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <Card key={index} className="group relative flex flex-col h-full bg-white border border-slate-100 border-l-[5px] border-l-kenya-green hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden">
+                <Card key={index} className="group relative flex flex-col h-full bg-white border border-slate-100 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden">
+                  {/* Top Brand Banner Accent matching Representative Card design */}
+                  <div className="h-2 w-full bg-gradient-to-r from-kenya-green via-kenya-red to-kenya-black flex-none" />
                   <CardHeader className="p-6">
                     <div className={`${feature.color} mb-3 group-hover:scale-105 transition-transform duration-300`}>
                       <Icon className="h-10 w-10" />

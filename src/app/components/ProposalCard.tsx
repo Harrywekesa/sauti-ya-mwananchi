@@ -59,7 +59,10 @@ export function ProposalCard({ proposal }: ProposalCardProps) {
   const currentStatus = statusConfig[proposal.status] || statusConfig.submitted;
 
   return (
-    <Card className="group relative flex flex-col h-full bg-white border border-slate-100 border-l-[5px] border-l-kenya-green hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden">
+    <Card className="group relative flex flex-col h-full bg-white border border-slate-100 hover:-translate-y-1.5 hover:shadow-xl hover:shadow-slate-100/80 transition-all duration-300 rounded-xl overflow-hidden">
+      
+      {/* Top Brand Banner Accent matching Representative Card design */}
+      <div className="h-2 w-full bg-gradient-to-r from-kenya-green via-kenya-red to-kenya-black flex-none" />
       
       {/* Decorative top-right ambient blur */}
       <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-kenya-green/5 to-transparent blur-xl pointer-events-none" />
